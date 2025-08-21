@@ -1,0 +1,21 @@
+[project]
+name = "timeseries-toolkit"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Abdullah",email = "abd.s.othman@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy (>=2.3.1)",
+    "pandas (>=2.3.1)",
+    "matplotlib (>=3.10.0)",
+    "seaborn (>=0.13.2)",
+    "scikit-learn (>=1.6)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
