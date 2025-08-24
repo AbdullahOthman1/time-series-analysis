@@ -2,9 +2,7 @@
 name = "timeseries-toolkit"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Abdullah",email = "abd.s.othman@gmail.com"}
-]
+
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
