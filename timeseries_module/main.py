@@ -1,0 +1,58 @@
+from pathlib import Path
+import pandas as pd
+from .pipeline import run_pipeline
+
+def main(
+    input_df: pd.DataFrame,
+    output_path: str | Path,
+    outlier_sensitivity_degree: str,
+    value_column: str,
+    missing_value_function=None,
+    outlier_fn=None,
+    time_column: str | None = None,
+    export: bool = True,
+) -> pd.DataFrame:
+    """
+    Main entry point for the time series module.
+
+    What it does (on `value_column`):
+      1) (optional) Fill missing values using the function you pass (e.g., fill_forward).
+      2) (optional) Remove outliers using a sensitivity profile: 'low' | 'medium' | 'high'.
+      3) (optional) Save the cleaned DataFrame to <output_path>/clean.csv.
+
+    Parameters
+    ----------
+    input_df : pd.DataFrame
+        Input DataFrame (not modified in place).
+    output_path : str | pathlib.Path
+        Directory to write the final CSV if `export=True`.
+    outlier_sensitivity_degree : {'low','medium','high'}
+        Controls outlier aggressiveness (mapped inside `handle_outliers`).
+    value_column : str
+        Name of the numeric column to process.
+    missing_value_function : callable or None, optional
+        e.g., fill_forward, fill_backward, window_mean, linear_interpolation.
+        Called as: missing_value_function(df, value_column). Use None to skip.
+    outlier_fn : callable or None, optional
+        e.g., remove_outliers_zscore, remove_outliers_iqr,
+        remove_outliers_linear_regression, remove_outliers_lof. Use None to skip.
+    time_column : str or None, optional
+        Optional time column used by some outlier methods.
+    export : bool, optional
+        If True (default), writes `<output_path>/clean.csv`.
+
+    Returns
+    -------
+    pd.DataFrame
+        The cleaned DataFrame.
+    """
+    return run_pipeline(
+        input_df=input_df,
+        output_path=output_path,
+        outlier_sensitivity_degree=outlier_sensitivity_degree,
+        value_column=value_column,
+        missing_value_function=missing_value_function,
+        outlier_fn=outlier_fn,
+        time_column=time_column,
+        export=export,
+    )
