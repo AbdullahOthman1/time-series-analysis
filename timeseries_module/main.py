@@ -10,15 +10,19 @@ def main(
     missing_value_function=None,
     outlier_fn=None,
     time_column: str | None = None,
+    rolling_fn=None,
+    rolling_kwargs: dict | None = None,
     export: bool = True,
 ) -> pd.DataFrame:
     """
     Main entry point for the time series module.
 
-    What it does (on `value_column`):
+     What it does (on `value_column`):
       1) (optional) Fill missing values using the function you pass (e.g., fill_forward).
       2) (optional) Remove outliers using a sensitivity profile: 'low' | 'medium' | 'high'.
-      3) (optional) Save the cleaned DataFrame to <output_path>/clean.csv.
+      3) (optional) Apply a rolling function (e.g., rolling_mean/median/std/var/sum/min/max/quantile).
+      4) (optional) Save outputs: <output_path>/clean.csv (cleaned), and if a rolling function was applied,
+        <output_path>/rolling.csv.
 
     Parameters
     ----------
@@ -38,8 +42,14 @@ def main(
         remove_outliers_linear_regression, remove_outliers_lof. Use None to skip.
     time_column : str or None, optional
         Optional time column used by some outlier methods.
+    rolling_fn : callable or None, optional
+        Optional rolling function applied after missing/outliers (e.g., rolling_mean, rolling_quantile).
+        If provided and `export=True`, a separate `rolling.csv` is written.
+    rolling_kwargs : dict or None, optional
+        Extra parameters for `rolling_fn` (e.g., {"window": 7} or {"window": 21, "q": 0.5, "method": "linear"}).
     export : bool, optional
-        If True (default), writes `<output_path>/clean.csv`.
+        If True (default), writes `<output_path>/clean.csv` and, when `rolling_fn` is provided,
+        `<output_path>/rolling.csv`.
 
     Returns
     -------
@@ -54,5 +64,7 @@ def main(
         missing_value_function=missing_value_function,
         outlier_fn=outlier_fn,
         time_column=time_column,
+        rolling_fn=rolling_fn,
+        rolling_kwargs=rolling_kwargs,
         export=export,
     )
