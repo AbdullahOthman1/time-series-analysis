@@ -8,9 +8,11 @@ This repository contains code and resources for time series analysis and forecas
 time-series-task/
 ├── data/               # Datasets for analysis
 ├── notebooks/          # Jupyter notebooks with experiments and EDA
-├── src/                # Source code for models and utilities
+├── output              # Folder for saving the results from the module.
+├── timeseries_module/  # Custom time series analysis module
 ├── pyproject.toml      # Project dependencies and configuration
 ├── README.md           # Project documentation
+├── usage.ipynb         # File for using the timeseries_module.
 ```
 
 ## Getting Started
@@ -26,7 +28,6 @@ time-series-task/
       ```bash
       pip install .
       ```
-    - Alternatively, check individual notebook files in the `notebooks/` directory for additional requirements.
 
 3. **Explore notebooks:**
     - Open files in the `notebooks/` directory for exploratory data analysis.
@@ -36,4 +37,4 @@ time-series-task/
 - **Data:** Time series datasets for forecasting tasks.
 - **Code:** Scripts and modules for preprocessing, modeling, and evaluation.
 - **Notebooks:** Step-by-step analysis and results.
-
+- **Timeseries_Module** A module that can handle missing values, removing outliers and applying rolling window.
