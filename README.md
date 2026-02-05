@@ -157,5 +157,4 @@ python database/init_db.py
 ## Authors
 
 - **Abdullah Othman**  
-- Original repo: [AbdullahOthman1/time-series-task](https://github.com/AbdullahOthman1/time-series-task)
 
